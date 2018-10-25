@@ -15,6 +15,8 @@ gem 'puma', '~> 3.11'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.12'
+gem 'jwt'
+gem 'simple_command'
 
 gem 'nokogiri', '~> 1.8.5'
 # Use ActiveStorage variant
