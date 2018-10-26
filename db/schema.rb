@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_164236) do
+ActiveRecord::Schema.define(version: 2018_10_26_164652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "animals", force: :cascade do |t|
+    t.bigint "products_id"
+    t.string "specie"
+    t.string "race"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["products_id"], name: "index_animals_on_products_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "quantity"
+    t.float "price"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "remedies", force: :cascade do |t|
+    t.bigint "products_id"
+    t.boolean "controlled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["products_id"], name: "index_remedies_on_products_id"
+  end
+
+  create_table "toys", force: :cascade do |t|
+    t.bigint "products_id"
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["products_id"], name: "index_toys_on_products_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,4 +59,7 @@ ActiveRecord::Schema.define(version: 2018_10_24_164236) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "animals", "products", column: "products_id"
+  add_foreign_key "remedies", "products", column: "products_id"
+  add_foreign_key "toys", "products", column: "products_id"
 end

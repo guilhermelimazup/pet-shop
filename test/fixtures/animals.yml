@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Product.references: MyString
+  specie: MyString
+  race: MyString
+
+two:
+  Product.references: MyString
+  specie: MyString
+  race: MyString
