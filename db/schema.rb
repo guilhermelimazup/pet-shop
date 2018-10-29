@@ -10,56 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_164652) do
+ActiveRecord::Schema.define(version: 2018_10_29_142524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "animals", force: :cascade do |t|
-    t.bigint "products_id"
-    t.string "specie"
     t.string "race"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_animals_on_products_id"
+    t.index ["product_id"], name: "index_animals_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "quantity"
-    t.float "price"
-    t.integer "type"
+    t.string "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "remedies", force: :cascade do |t|
-    t.bigint "products_id"
     t.boolean "controlled"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_remedies_on_products_id"
+    t.index ["product_id"], name: "index_remedies_on_product_id"
   end
 
   create_table "toys", force: :cascade do |t|
-    t.bigint "products_id"
     t.string "brand"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["products_id"], name: "index_toys_on_products_id"
+    t.index ["product_id"], name: "index_toys_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "admin"
+    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "animals", "products", column: "products_id"
-  add_foreign_key "remedies", "products", column: "products_id"
-  add_foreign_key "toys", "products", column: "products_id"
+  add_foreign_key "animals", "products"
+  add_foreign_key "remedies", "products"
+  add_foreign_key "toys", "products"
 end

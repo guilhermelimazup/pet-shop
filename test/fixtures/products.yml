@@ -3,13 +3,9 @@
 one:
   name: MyString
   description: MyString
-  quantity: 1
-  price: 1.5
-  type: 
+  price: MyString
 
 two:
   name: MyString
   description: MyString
-  quantity: 1
-  price: 1.5
-  type: 
+  price: MyString
