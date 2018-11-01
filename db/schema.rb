@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_193320) do
+ActiveRecord::Schema.define(version: 2018_10_29_184318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_193320) do
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -42,9 +43,10 @@ ActiveRecord::Schema.define(version: 2018_10_30_193320) do
     t.bigint "user_id"
     t.float "total_value"
     t.float "subtotal"
-    t.string "order_status"
+    t.bigint "order_status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_193320) do
   add_foreign_key "animals", "products"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "remedies", "products"
   add_foreign_key "toys", "products"

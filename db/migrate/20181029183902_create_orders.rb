@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.float :total_value
       t.float :subtotal
-      t.string :order_status
+      t.references :order_status, foreign_key: true
       t.timestamps
     end
   end

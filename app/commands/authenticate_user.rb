@@ -10,10 +10,8 @@ class AuthenticateUser
 
   def call
     if user
-      if check_order(user)
-        puts order.to_json
-        JsonWebToken.encode(user_id: user.id, order_id: order.id)
-      end
+      order = check_order(user)
+      JsonWebToken.encode(user_id: user.id, order_id: order.id)
     end
   end
 
@@ -29,8 +27,8 @@ class AuthenticateUser
   end
 
   def check_order(user)
-    order = Order.new(user_id: user.id)
-    return order if order.save
+    order = Order.new(user_id: user.id, total_value: 0.0, subtotal: 0.0)
+    return order if order.save!
     errors.add :user_authentication, 'error retrieving cart'
     nil
   end

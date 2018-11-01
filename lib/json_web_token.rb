@@ -3,6 +3,8 @@ class JsonWebToken
     
     def encode(payload, exp = 24.hours.from_now)
       payload[:exp] = exp.to_i
+      puts "Payload Nil" if payload.nil?
+      puts "Chave Nil" if Rails.application.credentials.secret_key_base.nil?
       JWT.encode(payload, Rails.application.credentials.secret_key_base)
     end
 
