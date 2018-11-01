@@ -2,6 +2,10 @@ class ApplicationController < ActionController::API
   before_action :authenticate_request
     attr_reader :current_user
 
+    def current_order
+      @current_order = CurrentOrder.call(request.headers).result
+    end
+
     private
 
     def authenticate_request

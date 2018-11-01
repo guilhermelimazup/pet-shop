@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-
+  skip_before_action :authenticate_request
   def new
   end
   
@@ -10,7 +10,11 @@ class UserController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    User.save(@user)
+    if @user.save
+      render json: @user, status: 201
+    else
+      render json: @user.errors, status: 422 
+    end
   end
 
   def show

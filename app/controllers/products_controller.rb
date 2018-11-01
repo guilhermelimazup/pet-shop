@@ -39,6 +39,10 @@ class ProductsController < ApplicationController
     @product.destroy
   end
 
+  def add_to_cart
+    @purchase_item = JWT.decode()
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
